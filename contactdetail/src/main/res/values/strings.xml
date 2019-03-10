@@ -1,0 +1,10 @@
+<resources>
+    <string name="favorite_menu_title">favorite</string>
+    <string name="tr_phone_text">PHONE:</string>
+    <string name="tr_home_phone_text">Home</string>
+    <string name="tr_mobile_phone_text">Mobile</string>
+    <string name="tr_work_phone_text">Work</string>
+    <string name="tr_address_text">ADDRESS:</string>
+    <string name="tr_birthdate_text">BIRTHDATE:</string>
+    <string name="tr_email_text">EMAIL:</string>
+</resources>

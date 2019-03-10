@@ -1,0 +1,8 @@
+<resources>
+    <string name="tr_favorite_contacts_title">FAVORITE CONTACTS</string>
+    <string name="tr_other_contacts_title">OTHER CONTACTS</string>
+    <string name="tr_successful_contact_update">Successful contact update</string>
+    <string name="tr_unsuccessful_contact_update">Unsuccessful contact update</string>
+    <string name="tr_message_error">Oops, we received an error when trying to get your contact list. Please try again.</string>
+    <string name="tr_retry">Retry</string>
+</resources>

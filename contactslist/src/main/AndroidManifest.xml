@@ -1,0 +1,13 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="jorge.gonzalez.solstice.contactslist" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:theme="@style/AppTheme">
+        <activity android:name=".presentation.ui.ContactListActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"/>
+    </application>
+
+</manifest>

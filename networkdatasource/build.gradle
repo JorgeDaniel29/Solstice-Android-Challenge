@@ -1,0 +1,16 @@
+apply from: "$rootDir/base/build.gradle.kts"
+
+android {
+    defaultConfig {
+        buildConfigField "String", "SERVER_BASE_URL", "\"https://s3.amazonaws.com/technical-challenge/\""
+    }
+}
+
+dependencies {
+    implementation Dependencies.cache
+    implementation Dependencies.gson
+    implementation Dependencies.retrofit
+    implementation Dependencies.retrofitGsonConverter
+    implementation Dependencies.retrofitRxSupport
+    implementation Dependencies.okhttp3
+}

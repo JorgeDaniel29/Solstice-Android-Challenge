@@ -1,0 +1,7 @@
+apply from: "$rootDir/base/build.gradle.kts"
+
+dependencies {
+    api project(Modules.base)
+
+    implementation Dependencies.materialDesign
+}

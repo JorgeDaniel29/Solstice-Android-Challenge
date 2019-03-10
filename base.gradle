@@ -1,0 +1,27 @@
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'org.jetbrains.kotlin.android.extensions'
+
+android {
+    compileSdkVersion App.compileSdkVersion
+
+    androidExtensions {
+        experimental = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation Dependencies.appCompat
+    implementation Dependencies.constraintLayout
+    implementation Dependencies.kotlinStdLib
+    implementation Dependencies.koinAndroid
+    implementation Dependencies.koinAndroidLifecycle
+    implementation Dependencies.koinAndroidViewModel
+    implementation Dependencies.picasso
+    implementation Dependencies.lifecycle
+    implementation Dependencies.retrofit
+    implementation Dependencies.retrofitGsonConverter
+    implementation Dependencies.retrofitRxSupport
+}

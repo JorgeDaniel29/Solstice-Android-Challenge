@@ -1,0 +1,10 @@
+apply from: "$rootDir/base/build.gradle.kts"
+
+dependencies {
+    api project(Modules.base)
+    implementation project(Modules.network)
+
+    implementation Dependencies.materialDesign
+    implementation Dependencies.groupie
+    implementation Dependencies.groupieAndroidExtensions
+}
