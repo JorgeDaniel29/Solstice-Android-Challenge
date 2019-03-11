@@ -35,7 +35,7 @@ class NavigationActivity : AppCompatActivity() {
 
     private fun navigateToFetchContactsList(contactId: String? = null) = ContactListActivity.startActivityForResult(this@NavigationActivity, contactId)
     private fun navigateToContactDetail(contact: Contact) = ContactDetailActivity.startActivityForResult(this@NavigationActivity, contact)
-    private fun isRequestCanceled(resultCode: Int) :Boolean = (resultCode == Activity.RESULT_CANCELED)
+    private fun isRequestCanceled(resultCode: Int): Boolean = (resultCode == Activity.RESULT_CANCELED)
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

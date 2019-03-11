@@ -69,7 +69,7 @@ class ContactListActivity : AppCompatActivity() {
 
         contactsUpdateUiState.nonNullObserve(this@ContactListActivity) {
             when (it) {
-                is ContactUpdateUiState.Data -> {
+                is ContactUpdateUiState.Complete -> {
                     Toast.makeText(this@ContactListActivity,
                             getString(R.string.tr_successful_contact_update),
                             Toast.LENGTH_SHORT).show()

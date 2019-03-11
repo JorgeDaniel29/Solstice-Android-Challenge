@@ -19,31 +19,29 @@ class ContactDetailViewModel : ViewModel() {
     val contactDetail = SingleLiveEvent<ContactDetail>()
 
     fun initContactDetail(contact: Contact) {
-        name.postValue(contact.name)
-        companyName.postValue(contact.companyName)
-        isFavorite.postValue(contact.isFavorite)
-        largeImageURL.postValue(contact.largeImageURL)
-        contactDetail.postValue(ContactDetail(contact.emailAddress,
+        name.value = (contact.name)
+        companyName.value = contact.companyName
+        isFavorite.value = contact.isFavorite
+        largeImageURL.value = (contact.largeImageURL)
+        contactDetail.value = ContactDetail(contact.emailAddress,
                 toBirthDateFormat(contact.birthdate),
                 contact.phone.toPhoneFormat(),
                 contact.address.toAddressFormat())
-        )
     }
 
     fun setFavorite() {
         isFavorite.value?.let {
-            isFavorite.postValue(!it)
+            isFavorite.value = !it
         }
     }
 
     fun onSaveInstanceState(outState: Bundle?) = outState
             ?.let {
                 it.putBoolean(FAVORITE_EXTRA, isFavorite.value.takeIf { value -> value != null }
-                        ?: false)
-            }
+                        ?: false) }
 
     fun onRestoreInstanceState(savedInstanceState: Bundle?) = savedInstanceState
-            ?.let { isFavorite.postValue(it.getBoolean(FAVORITE_EXTRA)) }
+            ?.let { isFavorite.value = it.getBoolean(FAVORITE_EXTRA) }
 
     companion object {
         private const val FAVORITE_EXTRA = "favorite"

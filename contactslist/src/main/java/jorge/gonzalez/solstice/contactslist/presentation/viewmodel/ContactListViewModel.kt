@@ -19,7 +19,7 @@ class ContactListViewModel(
         private val contactListUseCase: ContactListUseCase,
         private val updateContactUseCase: UpdateContactUseCase,
         private val contactItemMapper: ContactItemMapper
-): ViewModel() {
+) : ViewModel() {
 
     private lateinit var mapContacts: MapContacts
     val contactsListUiState = MutableLiveData<ContactListUiState>()
@@ -27,14 +27,16 @@ class ContactListViewModel(
     val goToContactDetail = SingleLiveEvent<AvailableContact>()
 
     fun fetchContactsList() {
-        contactListUseCase.execute(object :DisposableSingleObserver<MapContacts>() {
+        contactListUseCase.execute(object : DisposableSingleObserver<MapContacts>() {
             override fun onSuccess(contacts: MapContacts) {
                 mapContacts = contacts
                 contactsListUiState.postValue(ContactListUiState.Data(
-                        MapContactsItem(
-                                mapContacts.favoriteContactsList.map { contactItemMapper.mapToEntity(it) },
-                                mapContacts.otherContactsList.map { contactItemMapper.mapToEntity(it) }
-                        )))
+                        mapContacts.run {
+                            MapContactsItem(
+                                    favoriteContactsList.map { contactItemMapper.mapToEntity(it) },
+                                    otherContactsList.map { contactItemMapper.mapToEntity(it) })
+                        })
+                )
             }
 
             override fun onError(e: Throwable) = contactsListUiState.postValue(ContactListUiState.Error)
@@ -44,10 +46,10 @@ class ContactListViewModel(
     }
 
     fun updateContact(id: String) {
-        updateContactUseCase.execute(object :DisposableCompletableObserver(){
+        updateContactUseCase.execute(object : DisposableCompletableObserver() {
             override fun onComplete() {
                 fetchContactsList()
-                contactsUpdateUiState.postValue(ContactUpdateUiState.Data)
+                contactsUpdateUiState.postValue(ContactUpdateUiState.Complete)
             }
 
             override fun onError(e: Throwable) = contactsUpdateUiState.postValue(ContactUpdateUiState.Error)
@@ -57,12 +59,12 @@ class ContactListViewModel(
     }
 
     fun onContactClicked(contact: AvailableContactItem) {
-        goToContactDetail.postValue(
-                if (contact.isFavorite)
-                    mapContacts.favoriteContactsList.find { it.id == contact.id }
-                else
-                    mapContacts.otherContactsList.find { it.id == contact.id }
-        )
+        goToContactDetail.value = mapContacts.run {
+            if (contact.isFavorite)
+                favoriteContactsList.find { it.id == contact.id }
+            else
+                otherContactsList.find { it.id == contact.id }
+        }
     }
 
     override fun onCleared() {

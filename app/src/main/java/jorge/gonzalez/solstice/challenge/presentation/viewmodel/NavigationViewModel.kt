@@ -9,8 +9,8 @@ class NavigationViewModel : ViewModel() {
     val navigateToContactsList = SingleLiveEvent<String>()
     val navigateToContactDetail = SingleLiveEvent<Contact>()
 
-    fun startNavigation(contactId: String? = null) = contactId?.apply { navigateToContactsList.postValue(this) }
+    fun startNavigation(contactId: String? = null) = contactId?.apply { navigateToContactsList.value = this }
             ?: navigateToContactsList.call()
 
-    fun goToContactDetail(contact: Contact) = navigateToContactDetail.postValue(contact)
+    fun goToContactDetail(contact: Contact) { navigateToContactDetail.value = contact }
 }
