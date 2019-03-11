@@ -33,12 +33,12 @@ class ContactListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contacts_list)
-        startViewModel()
+        startViewModel(savedInstanceState)
         bindViewModel()
     }
 
-    private fun startViewModel() = contactListViewModel.apply {
-        changeContact()?.let { updateContact(it) } ?: fetchContactsList()
+    private fun startViewModel(savedInstanceState: Bundle? = null) = contactListViewModel.apply {
+        changeContact()?.takeIf { savedInstanceState == null }?.let { updateContact(it) } ?: fetchContactsList()
     }
 
     private fun bindViewModel() = contactListViewModel.run {
